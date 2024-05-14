@@ -16,7 +16,9 @@ namespace VLT.Music
     {
 
         List<string> lstFiles = new List<string>();
-        string sFolderPath = "";
+        string sFolderPath1 = "";
+        string sFolderPath2 = "";
+
         public VltMusic()
         {
             InitializeComponent();
@@ -26,8 +28,8 @@ namespace VLT.Music
         {
             if(folderBrowserDialog1.ShowDialog() == DialogResult.OK)
             {
-                sFolderPath = folderBrowserDialog1.SelectedPath;
-                var myThread = new System.Threading.Thread(() => getFiles(sFolderPath));
+                sFolderPath1 = folderBrowserDialog1.SelectedPath;
+                var myThread = new System.Threading.Thread(() => getFiles(sFolderPath1));
                 myThread.Start();
             }
 
@@ -56,8 +58,8 @@ namespace VLT.Music
             int r = rnd.Next(lstFiles.Count);
             string sFile = lstFiles[r];
             //var myThread = new System.Threading.Thread(() => PlayMusic(sFile));
-            var myThread = new System.Threading.Thread(() => PlayMusicFodler());
-            myThread.Start();
+            //var myThread = new System.Threading.Thread(() => PlayMusicFodler());
+            //myThread.Start();
         }
 
         private void PlayMusic(string file)
@@ -67,9 +69,9 @@ namespace VLT.Music
             player.Play();
         }
 
-        private void PlayMusicFodler()
+        private void PlayMusicFodler(string sFolder)
         {
-            DirectoryInfo d = new DirectoryInfo(sFolderPath);
+            DirectoryInfo d = new DirectoryInfo(sFolder);
 
             FileInfo[] Files = d.GetFiles("*.wav");
             System.Media.SoundPlayer player = new System.Media.SoundPlayer();
@@ -84,6 +86,45 @@ namespace VLT.Music
             }
             player.Stop();
             player.Dispose();
+        }
+
+        private void VltMusic_Load(object sender, EventArgs e)
+        {
+            timer1.Start();
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            string sTime = System.DateTime.Now.ToString("HH:mm:ss");
+            lblTime.InvokeEx(x => x.Text = sTime);
+
+            
+            TimeSpan timeOfDay = System.DateTime.Now.TimeOfDay;
+            int hour = timeOfDay.Hours;
+            int min = timeOfDay.Minutes;
+            int sec = timeOfDay.Seconds;                       
+
+            if(hour == 10 && min == 30 && sec == 0)
+            {
+                var myThread = new System.Threading.Thread(() => PlayMusicFodler(sFolderPath1));
+                myThread.Start();
+            }
+
+            if (hour == 15 && min == 30 && sec == 0)
+            {
+                var myThread = new System.Threading.Thread(() => PlayMusicFodler(sFolderPath2));
+                myThread.Start();
+            }
+        }
+
+        private void cmdLoadList2_Click(object sender, EventArgs e)
+        {
+            if (folderBrowserDialog2.ShowDialog() == DialogResult.OK)
+            {
+                sFolderPath2 = folderBrowserDialog2.SelectedPath;
+                var myThread = new System.Threading.Thread(() => getFiles(sFolderPath2));
+                myThread.Start();
+            }
         }
     }
 
