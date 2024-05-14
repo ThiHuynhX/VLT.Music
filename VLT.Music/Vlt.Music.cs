@@ -16,6 +16,7 @@ namespace VLT.Music
     {
 
         List<string> lstFiles = new List<string>();
+        string sFolderPath = "";
         public VltMusic()
         {
             InitializeComponent();
@@ -24,8 +25,9 @@ namespace VLT.Music
         private void cmdLoad_Click(object sender, EventArgs e)
         {
             if(folderBrowserDialog1.ShowDialog() == DialogResult.OK)
-            {                
-                var myThread = new System.Threading.Thread(() => getFiles(folderBrowserDialog1.SelectedPath));
+            {
+                sFolderPath = folderBrowserDialog1.SelectedPath;
+                var myThread = new System.Threading.Thread(() => getFiles(sFolderPath));
                 myThread.Start();
             }
 
@@ -50,11 +52,11 @@ namespace VLT.Music
 
         private void cmdPlay_Click(object sender, EventArgs e)
         {
-
             Random rnd = new Random();
             int r = rnd.Next(lstFiles.Count);
             string sFile = lstFiles[r];
-            var myThread = new System.Threading.Thread(() => PlayMusic(sFile));
+            //var myThread = new System.Threading.Thread(() => PlayMusic(sFile));
+            var myThread = new System.Threading.Thread(() => PlayMusicFodler());
             myThread.Start();
         }
 
@@ -63,6 +65,25 @@ namespace VLT.Music
             lblPlayingSong.InvokeEx(x => x.Text = "Playing: " + file);
             System.Media.SoundPlayer player = new System.Media.SoundPlayer(file);
             player.Play();
+        }
+
+        private void PlayMusicFodler()
+        {
+            DirectoryInfo d = new DirectoryInfo(sFolderPath);
+
+            FileInfo[] Files = d.GetFiles("*.wav");
+            System.Media.SoundPlayer player = new System.Media.SoundPlayer();
+
+            for (int i = 0; i < Files.Count(); i++)
+            {
+                FileInfo file = Files[i];
+                lblPlayingSong.InvokeEx(x => x.Text = "Playing: " + file.Name);
+                player.SoundLocation = file.FullName;
+                player.Play();
+                Thread.Sleep(1000);
+            }
+            player.Stop();
+            player.Dispose();
         }
     }
 
