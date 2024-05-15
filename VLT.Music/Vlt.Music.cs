@@ -74,18 +74,30 @@ namespace VLT.Music
             DirectoryInfo d = new DirectoryInfo(sFolder);
 
             FileInfo[] Files = d.GetFiles("*.wav");
-            System.Media.SoundPlayer player = new System.Media.SoundPlayer();
 
-            for (int i = 0; i < Files.Count(); i++)
-            {
-                FileInfo file = Files[i];
-                lblPlayingSong.InvokeEx(x => x.Text = "Playing: " + file.Name);
-                player.SoundLocation = file.FullName;
-                player.Play();
-                Thread.Sleep(1000);
-            }
-            player.Stop();
-            player.Dispose();
+            //random file
+            Random rnd = new Random();
+            int r = rnd.Next(Files.Count());
+            FileInfo file = Files[r];
+
+            System.Media.SoundPlayer player = new System.Media.SoundPlayer(file.FullName);
+            lblPlayingSong.InvokeEx(x => x.Text = "Playing: " + file.Name);
+            player.Play();
+
+            //Play folder
+            //System.Media.SoundPlayer player = new System.Media.SoundPlayer();
+
+            //for (int i = 0; i < Files.Count(); i++)
+            //{
+            //    FileInfo file = Files[i];
+            //    lblPlayingSong.InvokeEx(x => x.Text = "Playing: " + file.Name);
+            //    player.SoundLocation = file.FullName;
+            //    player.Play();
+            //    Thread.Sleep(1000);
+            //}
+
+            //player.Stop();
+            //player.Dispose();
         }
 
         private void VltMusic_Load(object sender, EventArgs e)
@@ -104,7 +116,7 @@ namespace VLT.Music
             int min = timeOfDay.Minutes;
             int sec = timeOfDay.Seconds;                       
 
-            if(hour == 10 && min == 30 && sec == 0)
+            if(hour == 14 && min == 00 && sec == 0)
             {
                 var myThread = new System.Threading.Thread(() => PlayMusicFodler(sFolderPath1));
                 myThread.Start();

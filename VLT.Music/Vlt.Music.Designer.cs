@@ -73,7 +73,7 @@
             // 
             // folderBrowserDialog1
             // 
-            this.folderBrowserDialog1.SelectedPath = "D:\\Sound\\m1";
+            this.folderBrowserDialog1.SelectedPath = "C:\\Sound\\m1";
             // 
             // lblPlayingSong
             // 
@@ -103,7 +103,7 @@
             // 
             // folderBrowserDialog2
             // 
-            this.folderBrowserDialog2.SelectedPath = "D:\\Sound\\m2";
+            this.folderBrowserDialog2.SelectedPath = "C:\\Sound\\m2";
             // 
             // cmdLoadList2
             // 
