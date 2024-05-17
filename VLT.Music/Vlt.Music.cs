@@ -110,19 +110,23 @@ namespace VLT.Music
             string sTime = System.DateTime.Now.ToString("HH:mm:ss");
             lblTime.InvokeEx(x => x.Text = sTime);
 
-            
+            int iH1 = Convert.ToInt32(txtH1.Value);
+            int iM1 = Convert.ToInt32(txtM1.Value);
+            int iH2 = Convert.ToInt32(txtH2.Value);
+            int iM2 = Convert.ToInt32(txtM2.Value);
+
             TimeSpan timeOfDay = System.DateTime.Now.TimeOfDay;
             int hour = timeOfDay.Hours;
             int min = timeOfDay.Minutes;
             int sec = timeOfDay.Seconds;                       
 
-            if(hour == 14 && min == 00 && sec == 0)
+            if(hour == iH1 && min == iM1 && sec == 0)
             {
                 var myThread = new System.Threading.Thread(() => PlayMusicFodler(sFolderPath1));
                 myThread.Start();
             }
 
-            if (hour == 15 && min == 30 && sec == 0)
+            if (hour == iH2 && min == iM2 && sec == 0)
             {
                 var myThread = new System.Threading.Thread(() => PlayMusicFodler(sFolderPath2));
                 myThread.Start();

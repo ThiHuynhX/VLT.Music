@@ -39,7 +39,15 @@
             this.lblTime = new System.Windows.Forms.Label();
             this.folderBrowserDialog2 = new System.Windows.Forms.FolderBrowserDialog();
             this.cmdLoadList2 = new System.Windows.Forms.Button();
+            this.txtH1 = new System.Windows.Forms.NumericUpDown();
+            this.txtM1 = new System.Windows.Forms.NumericUpDown();
+            this.txtH2 = new System.Windows.Forms.NumericUpDown();
+            this.txtM2 = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtH1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtM1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtH2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtM2)).BeginInit();
             this.SuspendLayout();
             // 
             // dataGridView1
@@ -79,7 +87,7 @@
             // 
             this.lblPlayingSong.AutoSize = true;
             this.lblPlayingSong.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPlayingSong.Location = new System.Drawing.Point(152, 17);
+            this.lblPlayingSong.Location = new System.Drawing.Point(155, 70);
             this.lblPlayingSong.Name = "lblPlayingSong";
             this.lblPlayingSong.Size = new System.Drawing.Size(47, 15);
             this.lblPlayingSong.TabIndex = 2;
@@ -115,11 +123,83 @@
             this.cmdLoadList2.UseVisualStyleBackColor = true;
             this.cmdLoadList2.Click += new System.EventHandler(this.cmdLoadList2_Click);
             // 
+            // txtH1
+            // 
+            this.txtH1.Location = new System.Drawing.Point(128, 14);
+            this.txtH1.Maximum = new decimal(new int[] {
+            24,
+            0,
+            0,
+            0});
+            this.txtH1.Name = "txtH1";
+            this.txtH1.Size = new System.Drawing.Size(41, 20);
+            this.txtH1.TabIndex = 5;
+            this.txtH1.Value = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            // 
+            // txtM1
+            // 
+            this.txtM1.Location = new System.Drawing.Point(175, 14);
+            this.txtM1.Maximum = new decimal(new int[] {
+            60,
+            0,
+            0,
+            0});
+            this.txtM1.Name = "txtM1";
+            this.txtM1.Size = new System.Drawing.Size(41, 20);
+            this.txtM1.TabIndex = 5;
+            this.txtM1.Value = new decimal(new int[] {
+            30,
+            0,
+            0,
+            0});
+            // 
+            // txtH2
+            // 
+            this.txtH2.Location = new System.Drawing.Point(128, 40);
+            this.txtH2.Maximum = new decimal(new int[] {
+            24,
+            0,
+            0,
+            0});
+            this.txtH2.Name = "txtH2";
+            this.txtH2.Size = new System.Drawing.Size(41, 20);
+            this.txtH2.TabIndex = 5;
+            this.txtH2.Value = new decimal(new int[] {
+            15,
+            0,
+            0,
+            0});
+            // 
+            // txtM2
+            // 
+            this.txtM2.Location = new System.Drawing.Point(175, 40);
+            this.txtM2.Maximum = new decimal(new int[] {
+            60,
+            0,
+            0,
+            0});
+            this.txtM2.Name = "txtM2";
+            this.txtM2.Size = new System.Drawing.Size(41, 20);
+            this.txtM2.TabIndex = 5;
+            this.txtM2.Value = new decimal(new int[] {
+            30,
+            0,
+            0,
+            0});
+            // 
             // VltMusic
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(672, 319);
+            this.Controls.Add(this.txtM2);
+            this.Controls.Add(this.txtM1);
+            this.Controls.Add(this.txtH2);
+            this.Controls.Add(this.txtH1);
             this.Controls.Add(this.cmdLoadList2);
             this.Controls.Add(this.lblTime);
             this.Controls.Add(this.lblPlayingSong);
@@ -134,6 +214,10 @@
             this.Text = "Vietluxtour Music";
             this.Load += new System.EventHandler(this.VltMusic_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtH1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtM1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtH2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtM2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -150,6 +234,10 @@
         private System.Windows.Forms.Label lblTime;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog2;
         private System.Windows.Forms.Button cmdLoadList2;
+        private System.Windows.Forms.NumericUpDown txtH1;
+        private System.Windows.Forms.NumericUpDown txtM1;
+        private System.Windows.Forms.NumericUpDown txtH2;
+        private System.Windows.Forms.NumericUpDown txtM2;
     }
 }
 
