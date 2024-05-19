@@ -38,34 +38,38 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.lblTime = new System.Windows.Forms.Label();
             this.folderBrowserDialog2 = new System.Windows.Forms.FolderBrowserDialog();
-            this.cmdLoadList2 = new System.Windows.Forms.Button();
             this.txtH1 = new System.Windows.Forms.NumericUpDown();
             this.txtM1 = new System.Windows.Forms.NumericUpDown();
             this.txtH2 = new System.Windows.Forms.NumericUpDown();
             this.txtM2 = new System.Windows.Forms.NumericUpDown();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.cmdLoadList2 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtH1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtM1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtH2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtM2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.SuspendLayout();
             // 
             // dataGridView1
             // 
             this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(12, 94);
+            this.dataGridView1.Location = new System.Drawing.Point(12, 180);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(650, 213);
             this.dataGridView1.TabIndex = 0;
             // 
             // cmdLoad
             // 
-            this.cmdLoad.Location = new System.Drawing.Point(12, 12);
+            this.cmdLoad.Location = new System.Drawing.Point(15, 12);
             this.cmdLoad.Name = "cmdLoad";
-            this.cmdLoad.Size = new System.Drawing.Size(78, 23);
+            this.cmdLoad.Size = new System.Drawing.Size(75, 23);
             this.cmdLoad.TabIndex = 1;
-            this.cmdLoad.Text = "Load List";
+            this.cmdLoad.Text = "Folder 1";
             this.cmdLoad.UseVisualStyleBackColor = true;
             this.cmdLoad.Click += new System.EventHandler(this.cmdLoad_Click);
             // 
@@ -113,19 +117,9 @@
             // 
             this.folderBrowserDialog2.SelectedPath = "C:\\Sound\\m2";
             // 
-            // cmdLoadList2
-            // 
-            this.cmdLoadList2.Location = new System.Drawing.Point(15, 42);
-            this.cmdLoadList2.Name = "cmdLoadList2";
-            this.cmdLoadList2.Size = new System.Drawing.Size(75, 23);
-            this.cmdLoadList2.TabIndex = 4;
-            this.cmdLoadList2.Text = "Load List 2";
-            this.cmdLoadList2.UseVisualStyleBackColor = true;
-            this.cmdLoadList2.Click += new System.EventHandler(this.cmdLoadList2_Click);
-            // 
             // txtH1
             // 
-            this.txtH1.Location = new System.Drawing.Point(128, 14);
+            this.txtH1.Location = new System.Drawing.Point(408, 12);
             this.txtH1.Maximum = new decimal(new int[] {
             24,
             0,
@@ -142,7 +136,7 @@
             // 
             // txtM1
             // 
-            this.txtM1.Location = new System.Drawing.Point(175, 14);
+            this.txtM1.Location = new System.Drawing.Point(455, 12);
             this.txtM1.Maximum = new decimal(new int[] {
             60,
             0,
@@ -159,7 +153,7 @@
             // 
             // txtH2
             // 
-            this.txtH2.Location = new System.Drawing.Point(128, 40);
+            this.txtH2.Location = new System.Drawing.Point(408, 40);
             this.txtH2.Maximum = new decimal(new int[] {
             24,
             0,
@@ -176,7 +170,7 @@
             // 
             // txtM2
             // 
-            this.txtM2.Location = new System.Drawing.Point(175, 40);
+            this.txtM2.Location = new System.Drawing.Point(455, 40);
             this.txtM2.Maximum = new decimal(new int[] {
             60,
             0,
@@ -191,11 +185,48 @@
             0,
             0});
             // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(97, 14);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.ReadOnly = true;
+            this.textBox1.Size = new System.Drawing.Size(305, 20);
+            this.textBox1.TabIndex = 6;
+            // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(96, 40);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.ReadOnly = true;
+            this.textBox2.Size = new System.Drawing.Size(305, 20);
+            this.textBox2.TabIndex = 6;
+            // 
+            // dataGridView2
+            // 
+            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView2.Location = new System.Drawing.Point(12, 99);
+            this.dataGridView2.Name = "dataGridView2";
+            this.dataGridView2.Size = new System.Drawing.Size(648, 71);
+            this.dataGridView2.TabIndex = 7;
+            // 
+            // cmdLoadList2
+            // 
+            this.cmdLoadList2.Location = new System.Drawing.Point(15, 41);
+            this.cmdLoadList2.Name = "cmdLoadList2";
+            this.cmdLoadList2.Size = new System.Drawing.Size(75, 23);
+            this.cmdLoadList2.TabIndex = 4;
+            this.cmdLoadList2.Text = "Folder 2";
+            this.cmdLoadList2.UseVisualStyleBackColor = true;
+            this.cmdLoadList2.Click += new System.EventHandler(this.cmdLoadList2_Click);
+            // 
             // VltMusic
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(672, 319);
+            this.ClientSize = new System.Drawing.Size(672, 405);
+            this.Controls.Add(this.dataGridView2);
+            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.txtM2);
             this.Controls.Add(this.txtM1);
             this.Controls.Add(this.txtH2);
@@ -218,6 +249,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtM1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtH2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtM2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -233,11 +265,14 @@
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Label lblTime;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog2;
-        private System.Windows.Forms.Button cmdLoadList2;
         private System.Windows.Forms.NumericUpDown txtH1;
         private System.Windows.Forms.NumericUpDown txtM1;
         private System.Windows.Forms.NumericUpDown txtH2;
         private System.Windows.Forms.NumericUpDown txtM2;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.DataGridView dataGridView2;
+        private System.Windows.Forms.Button cmdLoadList2;
     }
 }
 

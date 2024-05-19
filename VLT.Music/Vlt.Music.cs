@@ -29,8 +29,10 @@ namespace VLT.Music
             if(folderBrowserDialog1.ShowDialog() == DialogResult.OK)
             {
                 sFolderPath1 = folderBrowserDialog1.SelectedPath;
-                var myThread = new System.Threading.Thread(() => getFiles(sFolderPath1));
-                myThread.Start();
+                textBox1.Text = sFolderPath1;
+                //var myThread = new System.Threading.Thread(() => getFiles(sFolderPath1));
+                //myThread.Start();
+                LoadFiles();
             }
 
         }     
@@ -54,19 +56,61 @@ namespace VLT.Music
 
         private void cmdPlay_Click(object sender, EventArgs e)
         {
-            Random rnd = new Random();
-            int r = rnd.Next(lstFiles.Count);
-            string sFile = lstFiles[r];
-            //var myThread = new System.Threading.Thread(() => PlayMusic(sFile));
-            //var myThread = new System.Threading.Thread(() => PlayMusicFodler());
-            //myThread.Start();
+            GetMusicReady(sFolderPath1);
+
         }
 
-        private void PlayMusic(string file)
+        private void GetMusicReady(string sFolder)
         {
-            lblPlayingSong.InvokeEx(x => x.Text = "Playing: " + file);
-            System.Media.SoundPlayer player = new System.Media.SoundPlayer(file);
-            player.Play();
+            List<string> lstFilesInFolder = new List<string>();
+            List<string> lstFile2Play = new List<string>();
+
+            if (Directory.Exists(sFolder))
+            {
+                DirectoryInfo d = new DirectoryInfo(sFolder);
+
+                FileInfo[] Files = d.GetFiles("*.wav");
+
+                foreach (FileInfo file in Files)
+                {
+                    lstFilesInFolder.Add(file.FullName);
+                }
+
+                lstFile2Play.Clear();
+
+                Random rnd = new Random();
+                int r = rnd.Next(lstFilesInFolder.Count);
+                lstFile2Play.Add(lstFilesInFolder[r]);
+                int r1 = rnd.Next(lstFilesInFolder.Count);
+                if(lstFilesInFolder.Count > 2 && r1 == r)
+                {
+                    do
+                    {
+                        r1 = rnd.Next(lstFilesInFolder.Count);
+                    } while (r1 == r);
+                }
+                //Console.WriteLine("r: " + r.ToString() + " - r1:" + r1.ToString());
+                lstFile2Play.Add(lstFilesInFolder[r1]);
+
+                dataGridView2.InvokeEx(y => y.DataSource = lstFile2Play.Select(x => new { Value = x }).ToList());
+                dataGridView2.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+
+                var myThread = new System.Threading.Thread(() => PlayMusic(lstFile2Play));
+                myThread.Start();
+            }
+        }
+
+        private void PlayMusic(List<string> lstFile2Play)
+        {
+            for (int i = 0; i < lstFile2Play.Count(); i++)
+            {
+                using (System.Media.SoundPlayer player = new System.Media.SoundPlayer())
+                {
+                    lblPlayingSong.InvokeEx(x => x.Text = "Playing: " + lstFile2Play[i]);
+                    player.SoundLocation = lstFile2Play[i];
+                    player.PlaySync();
+                }
+            }                    
         }
 
         private void PlayMusicFodler(string sFolder)
@@ -103,6 +147,44 @@ namespace VLT.Music
         private void VltMusic_Load(object sender, EventArgs e)
         {
             timer1.Start();
+            sFolderPath1 = folderBrowserDialog1.SelectedPath;
+            textBox1.Text = sFolderPath1;
+            sFolderPath2 = folderBrowserDialog2.SelectedPath;
+            textBox2.Text = sFolderPath2;
+
+            LoadFiles();
+        }
+
+        private void LoadFiles()
+        {
+            lstFiles.Clear();
+            if (Directory.Exists(sFolderPath1))
+            {
+                DirectoryInfo d1 = new DirectoryInfo(sFolderPath1);
+                FileInfo[] f1 = d1.GetFiles("*.wav");
+                for (int i = 0; i < f1.Count(); i++)
+                {
+                    lstFiles.Add(f1[i].FullName);
+                }
+            }
+
+            if (Directory.Exists(sFolderPath2))
+            {
+                DirectoryInfo d2 = new DirectoryInfo(sFolderPath2);
+                FileInfo[] f2 = d2.GetFiles("*.wav");
+                for (int i = 0; i < f2.Count(); i++)
+                {
+                    lstFiles.Add(f2[i].FullName);
+                }
+            }
+
+            if (lstFiles.Count > 0)
+            {
+                dataGridView1.InvokeEx(y => y.DataSource = lstFiles.Select(x => new { Value = x }).ToList());
+                dataGridView1.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+
+            }
+
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -122,14 +204,16 @@ namespace VLT.Music
 
             if(hour == iH1 && min == iM1 && sec == 0)
             {
-                var myThread = new System.Threading.Thread(() => PlayMusicFodler(sFolderPath1));
-                myThread.Start();
+                //var myThread = new System.Threading.Thread(() => PlayMusicFodler(sFolderPath1));
+                //myThread.Start();
+                GetMusicReady(sFolderPath1);
             }
 
             if (hour == iH2 && min == iM2 && sec == 0)
             {
-                var myThread = new System.Threading.Thread(() => PlayMusicFodler(sFolderPath2));
-                myThread.Start();
+                GetMusicReady(sFolderPath1);
+                //var myThread = new System.Threading.Thread(() => PlayMusicFodler(sFolderPath2));
+                //myThread.Start();
             }
         }
 
@@ -138,8 +222,10 @@ namespace VLT.Music
             if (folderBrowserDialog2.ShowDialog() == DialogResult.OK)
             {
                 sFolderPath2 = folderBrowserDialog2.SelectedPath;
-                var myThread = new System.Threading.Thread(() => getFiles(sFolderPath2));
-                myThread.Start();
+                textBox2.Text = sFolderPath2;
+                LoadFiles();
+                //var myThread = new System.Threading.Thread(() => getFiles(sFolderPath2));
+                //myThread.Start();
             }
         }
     }
