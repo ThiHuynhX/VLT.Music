@@ -18,7 +18,7 @@ namespace VLT.Music
         List<string> lstFiles = new List<string>();
         string sFolderPath1 = "";
         string sFolderPath2 = "";
-
+        string vltSong = @"C:\Sound\vlt1.wav";
         public VltMusic()
         {
             InitializeComponent();
@@ -78,19 +78,24 @@ namespace VLT.Music
 
                 lstFile2Play.Clear();
 
+                if (File.Exists(vltSong))
+                {
+                    lstFile2Play.Add(vltSong);
+                }
+
                 Random rnd = new Random();
                 int r = rnd.Next(lstFilesInFolder.Count);
                 lstFile2Play.Add(lstFilesInFolder[r]);
-                int r1 = rnd.Next(lstFilesInFolder.Count);
-                if(lstFilesInFolder.Count > 2 && r1 == r)
-                {
-                    do
-                    {
-                        r1 = rnd.Next(lstFilesInFolder.Count);
-                    } while (r1 == r);
-                }
-                //Console.WriteLine("r: " + r.ToString() + " - r1:" + r1.ToString());
-                lstFile2Play.Add(lstFilesInFolder[r1]);
+
+                //int r1 = rnd.Next(lstFilesInFolder.Count);
+                //if(lstFilesInFolder.Count > 2 && r1 == r)
+                //{
+                //    do
+                //    {
+                //        r1 = rnd.Next(lstFilesInFolder.Count);
+                //    } while (r1 == r);
+                //}
+                //lstFile2Play.Add(lstFilesInFolder[r1]);
 
                 dataGridView2.InvokeEx(y => y.DataSource = lstFile2Play.Select(x => new { Value = x }).ToList());
                 dataGridView2.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
